@@ -1,17 +1,29 @@
 $(document).ready(function() {
     // Trivia Questions //
-    
+    var questions = [
+    {
     // Question
-
+        question: "Sideshow Bob's archenemy is?",
     // Choices
-
+        choices: ["Bart", "Selma", "Rakes", "Musical Theater"],
     // Answer index (0-3)
-
+        answer: 2,
     // Gif/Img
-
-    // Times # of Questions //
-
-
+        photo: "assets/images/SideshowBob.gif"
+    },
+    {
+        question: "Who shot Mr Burnes?",
+        choices: ["Homer", "Maggie","Smithers", "Barney"],
+        answer: 1,
+        photo: "assets/images/Maggie.gif"
+    },
+    {
+        question: "What NFL team is given to homer by Hank Scorpio?",
+        choices: ["The Broncos", "The Cowboys", "The Jets", "The 49ers"],
+        answer: 0,
+        photo: "assets/images/Broncos.gif"
+}];
+    
 
     // Variables //
 
