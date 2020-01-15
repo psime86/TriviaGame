@@ -91,18 +91,27 @@ $(document).ready(function() {
             skipped++;
             stop();
             $("#answers").html("<p>Out of time! Correct answer is: " + pick.choices[pick.answer] + "</p>");
+            console.log(skipped)
         }
     }
 
     // Displaying the questions //
-    
+
     function displayQuestion(){
         //generate random index in trivia question array
         index = Math.floor(Math.random()*triviaQuestions.length);
         pick = triviaQuestions[index];
 
         $("#questions").html("<h2>" + pick.question + "</h2>");
+        for(var i = 0; i < pick.choices.length; i++){
+            var answerChoice = $("<div>");
+            answerChoice.addClass("answerchoice");
+            answerChoice.html(pick.choices[i]);
+            answerChoice.attr("data-guessvalue", i);
+            $("#answers").append(answerChoice);
+        }
     }
+
     // Picking answers //
     // On click event
 
