@@ -41,8 +41,10 @@ $(document).ready(function() {
     var skipped = 0;
     // Show questions
     var holder = [];
+    var totalQuestions = triviaQuestions.length;
+    var nextQuestion = [];
     // Timer
-    var timer = 20000;
+    var timer = 20;
     var running = false;
     var intervalId;
     // User answer
@@ -86,12 +88,19 @@ $(document).ready(function() {
         $("#timeleft").html("<h2>Time remaining: " + timer + "</h2>");
         timer --;
         
-        // Time runs out
+        // Timer = 0 //
+
+        // Timer stop
+        // Time is up message
+        // Display correct answer
+        // Skip count up
+        // Show picture
         if (timer === 0){
             skipped ++;
             stop();
             $("#answers").html("<p>Out of time! Correct answer is: " + pick.choices[pick.answer] + "</p>");
             console.log(skipped)
+            runGif();
         }
     }
 
@@ -114,46 +123,82 @@ $(document).ready(function() {
     }
 
     // Picking answers //
+
     // On click event
 
     $(document).on("click", ".answerchoice", function(){
-        alert("click!");
-        console.log(alert);
         userAnswer = parseInt($(this).attr("data-guessvalue"));
         console.log(userAnswer);
-        
+
+        // If right //
+
+        // Timer stop
+        // Correct message
+        // Win count up
+        // Show picture
         if (userAnswer === pick.answer) {
             stop();
             right ++;
             userAnswer="";
             $("#answers").html("<h4>Correct!</h4>");
             console.log(right);
+            runGif();
+        }
+
+        // Else wrong //
+
+        // Timer stop
+        // Wrong message
+        // Display correct answer
+        // Wrong count up
+        // Show picture
+        else {
+            stop();
+            wrong ++;
+            userAnswer="";
+            $("#answers").html("<h4>Incorrect! The correct answer is: " + pick.choices[pick.answer] + "<?h4>");
+            console.log(wrong);
+            runGif();
         }
     })
-    // Timer = 0 //
-    // Timer stop
-    // Time is up message
-    // Display correct answer
-    // Skip count up
-    // Show picture
 
-    // If right //
-    // Timer stop
-    // Correct message
-    // Win count up
-    // Show picture
+    // Function to be checked after each question //
 
-    // Else wrong //
-    // Timer stop
-    // Wrong message
-    // Display correct answer
-    // Wrong count up
-    // Show picture
+    // Display GIF
+    function runGif(){
+        $("#answers").append("<img src=" + pick.gif + ">");
+        nextQuestion.push(pick);
+        triviaQuestions.splice(index,1);
 
+        // Stop GIF from running //
+        
+        var hideGif = setTimeout(function(){
+            $("#answers").empty();
+            timer= 20;
+        
+        
+        // Check if new questions are available
+        if ((right + wrong + skipped) === totalQuestions){
+            $("#questions").empty();
+            $("#questions").html("<h2>Game Over! Results: </h2>");
+            $("#answers").append("<h3>Right: " + right + "</h3>");
+            $("#answers").append("<h3>Wrong: " + wrong + "</h3>");
+            $("#answers").append("<h3>Skipped: " + skipped + "</h3>");
+        }
+        // Display next question
+        else {
+            runTimer();
+            displayQuestion();
+        }
+        // After 9 seconds of GIF goodness
+    }, 9000);
+}
 
     // Game end function //
-    // Timer stop
     // Show right/wrong/skipped count
     // Play again?
+    
+    
+    
     // Reset game on click
 })
