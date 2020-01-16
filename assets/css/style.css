@@ -1,0 +1,31 @@
+body {
+    background-image: url("../images/SimpsonsClouds.jpg");
+    font-family: cursive;
+}
+
+h1 {
+    text-align: center;
+    font-size: 60px;
+    color: rgb(221, 202, 34);
+}
+
+.container {
+    margin: 50px auto 50px auto;
+    max-width: 900px;
+    height: 500px;
+    background: rgba(255, 240, 240, 0.514);
+    padding:15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+#questions {
+    text-align: center;
+    font-weight: bolder;
+}
+
+#answers {
+    text-align: center;
+    font-weight: bolder;
+}

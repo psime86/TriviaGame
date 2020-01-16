@@ -171,13 +171,14 @@ $(document).ready(function() {
         triviaQuestions.splice(index,1);
 
         // Stop GIF from running //
-        
+
         var hideGif = setTimeout(function(){
             $("#answers").empty();
             timer= 20;
         
         
         // Check if new questions are available
+        // Show right/wrong/skipped count if game is done
         if ((right + wrong + skipped) === totalQuestions){
             $("#questions").empty();
             $("#questions").html("<h2>Game Over! Results: </h2>");
@@ -194,11 +195,17 @@ $(document).ready(function() {
     }, 9000);
 }
 
-    // Game end function //
-    // Show right/wrong/skipped count
-    // Play again?
-    
-    
-    
+    // Replay function //
+
     // Reset game on click
+    $(document).on("click", "#reset", function(){
+        $("#answers").empty();
+        $("#questions").empty();
+		for(var i = 0; i < holder.length; i++){
+        triviaQuestions.push(holder[i]);
+        }
+        displayQuestion();
+        runTimer();
+    })
+   
 })
