@@ -9,25 +9,25 @@ $(document).ready(function() {
     // Answer index (0-3)
         answer: 2,
     // Gif/Img
-        photo: "assets/images/SideshowBob.gif"
+        gif: "assets/images/SideshowBob.gif"
     },
     {
         question: "Who shot Mr Burns?",
         choices: ["Homer", "Maggie","Smithers", "Barney"],
         answer: 1,
-        photo: "assets/images/Maggie.gif"
+        gif: "assets/images/Maggie.gif"
     },
     {
         question: "What NFL team is given to Homer by Hank Scorpio?",
         choices: ["The Broncos", "The Cowboys", "The Jets", "The 49ers"],
         answer: 0,
-        photo: "assets/images/Broncos.gif"
+        gif: "assets/images/Broncos.gif"
     },
     {
         question: "What did Lionel Hutz change his name to?",
         choices: ["Philip McNeille", "Daniel Cartright", "Cowboy Steve", "Miguel Sanchez"],
         answer: 3,
-        photo: "assets/images/MiguelSanchez.gif"
+        gif: "assets/images/MiguelSanchez.gif"
 }];
     
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
     // Show questions
     var holder = [];
     // Timer
-    var timer = 20;
+    var timer = 20000;
     var running = false;
     var intervalId;
     // User answer
@@ -55,7 +55,7 @@ $(document).ready(function() {
     // Start game with start button //
 
     // On click event
-    $("#start").on("click", function (){
+    $("#start").on("click", function(){
 		$("#start").hide();
 		displayQuestion();
 		runTimer();
@@ -88,7 +88,7 @@ $(document).ready(function() {
         
         // Time runs out
         if (timer === 0){
-            skipped++;
+            skipped ++;
             stop();
             $("#answers").html("<p>Out of time! Correct answer is: " + pick.choices[pick.answer] + "</p>");
             console.log(skipped)
@@ -105,6 +105,7 @@ $(document).ready(function() {
         $("#questions").html("<h2>" + pick.question + "</h2>");
         for(var i = 0; i < pick.choices.length; i++){
             var answerChoice = $("<div>");
+            console.log(answerChoice);
             answerChoice.addClass("answerchoice");
             answerChoice.html(pick.choices[i]);
             answerChoice.attr("data-guessvalue", i);
@@ -115,6 +116,20 @@ $(document).ready(function() {
     // Picking answers //
     // On click event
 
+    $(document).on("click", ".answerchoice", function(){
+        alert("click!");
+        console.log(alert);
+        userAnswer = parseInt($(this).attr("data-guessvalue"));
+        console.log(userAnswer);
+        
+        if (userAnswer === pick.answer) {
+            stop();
+            right ++;
+            userAnswer="";
+            $("#answers").html("<h4>Correct!</h4>");
+            console.log(right);
+        }
+    })
     // Timer = 0 //
     // Timer stop
     // Time is up message
